@@ -8,7 +8,11 @@ def gets_user_input
 
 
   def find_artist_by_name(input)
-    Artist.find_by(name: input)
+    #binding.pry
+    Artist.all.select do |artist|
+      artist.name.downcase == input
+    end
+
   end
 
 
@@ -23,31 +27,40 @@ def gets_user_input_for_artists
   gets.chomp
 end
 
-# def run
-# input = gets_user_input
-# print_tracks(input)
-# end
+def run
+input = gets_user_input
+
+artist = find_artist_by_name(input)
+print_tracks(artist)
+end
+
 def exit_app
   puts "Goodbye"
 end
 
-def run(songs)
-  input = ""
-  while input
-
-input = gets_user_input
-print_tracks(input)
-end
+# def run
+#
+#   input = ""
+#   while input
+#   end
+# input = gets_user_input
+# print_tracks(input)
+# end
 
 
 #find artist with the name of the  input
-def print_tracks(input)
-  artist = find_artist_by_name(input)
-  if !artist
+def print_tracks(artist)
+  #artist = find_artist_by_name(input)
+  #check to see if artist is in the artist array
+  #name = artist
+  if !Artist.all.include?(artist)
+    binding.pry
     p "No Artist Available."
     puts "Here are the available artist names you can choose from: " + "#{print_all_artist_names}"
-    input = gets.downcase.strip
-    print_tracks(input)
+    #input = gets.downcase.strip
+    run
+    #binding.pry
+    #print_tracks(input)
   else
     artist.tracks.map do |track|
       p track.name
