@@ -1,0 +1,23 @@
+# Add seed data here. Seed your database with `rake db:seed`
+
+album1 = Album.create(title: "Album1")
+album2 = Album.create(title: "Album2")
+album3 = Album.create(title: "Album3")
+album4 = Album.create(title: "Album4")
+album5 = Album.create(title: "Album5")
+album6 = Album.create(title: "Album6")
+album7 = Album.create(title: "Album7")
+album8 = Album.create(title: "Album8")
+album9 = Album.create(title: "Album9")
+album10 = Album.create(title: "Album10")
+
+artist1 = Artist.create(name: "Artist1")
+artist2 = Artist.create(name: "Artist2")
+artist3 = Artist.create(name: "Artist3")
+artist4=Artist.create(name: "Artist4")
+artist5=Artist.create(name: "Artist5")
+artist6=Artist.create(name: "Artist6")
+artist7=Artist.create(name: "Artist7")
+artist8=Artist.create(name: "Artist8")
+artist9=Artist.create(name: "Artist9")
+artist10=Artist.create(name: "Artist10")
