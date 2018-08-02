@@ -6,13 +6,9 @@ def gets_user_input
   gets.chomp
   end
 
-
   def find_artist_by_name(input)
     #binding.pry
-    Artist.all.select do |artist|
-      artist.name.downcase == input
-    end
-
+    Artist.all.find_by(name: input)
   end
 
 
@@ -30,6 +26,7 @@ end
 def run
 input = gets_user_input
 
+#find find_artist_by_name is returning an empty array for some reason. fix that.
 artist = find_artist_by_name(input)
 print_tracks(artist)
 end
@@ -48,22 +45,27 @@ end
 # end
 
 
-#find artist with the name of the  input
+#find artist with the name of the input
 def print_tracks(artist)
   #artist = find_artist_by_name(input)
   #check to see if artist is in the artist array
   #name = artist
+  #include is receiving an empty array from artist.
   if !Artist.all.include?(artist)
-    binding.pry
     p "No Artist Available."
-    puts "Here are the available artist names you can choose from: " + "#{print_all_artist_names}"
+    puts "Here are the available artist names and albums you can choose from: " + "#{print_all_artist_names}"
+    puts
     #input = gets.downcase.strip
     run
-    #binding.pry
     #print_tracks(input)
   else
+    puts "These are the tracks:"
     artist.tracks.map do |track|
       p track.name
+    end
+    puts "These are the albums:"
+    artist.albums.map do |album|
+      p album.title
     end
   end
   # Artist.where('lower(name) = ?', input.downcase).first
