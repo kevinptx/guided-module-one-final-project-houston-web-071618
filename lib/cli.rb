@@ -6,8 +6,13 @@ class CommandLineInterface
     gets.chomp
   end
 
+
   def find_artist_by_name(input)
-    Artist.all.find_by(name: input)
+    Artist.find_by(name: input)
+  end
+
+  def find_by_artist_id(id)
+    Artist.find(id)
   end
 
   def print_all_artist_names
@@ -50,10 +55,8 @@ class CommandLineInterface
 
   def run
     input = gets_user_input
-
+    artist = find_by_artist_id(input.to_i)
     #find find_artist_by_name is returning an empty array for some reason. fix that.
-
-    artist = find_artist_by_name(input)
     print_tracks(artist)
   end
 
@@ -63,7 +66,7 @@ class CommandLineInterface
 
   def list
     Artist.all.each.with_index(1) do |artist, i|
-      puts "#{i}. #{artist.name}"
+      puts "#{artist.id}. #{artist.name}"
     end
   end
 end
