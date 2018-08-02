@@ -6,7 +6,6 @@ class CommandLineInterface
     gets.chomp
   end
 
-
   def find_artist_by_name(input)
     Artist.find_by(name: input)
   end
@@ -21,7 +20,6 @@ class CommandLineInterface
     end
   end
 
-  #write an if statement
   def gets_user_input_for_artists
     puts "Choose an artist from the list above"
     gets.chomp
@@ -31,38 +29,31 @@ class CommandLineInterface
     puts "Goodbye"
   end
 
-  #artist = find_artist_by_name(input)
-  #check to see if artist is in the artist array
-  #name = artist
-  #include is receiving an empty array from artist.
-  def print_tracks(artist)
-    if !Artist.all.include?(artist)
-      p "No Artist Available."
-      puts "Here are the available artist names and albums you can choose from: " + "#{print_all_artist_names}"
-      #input = gets.downcase.strip
-      #print_tracks(input)
-    else
-      puts "These are the tracks:"
-      artist.tracks.map do |track|
-        p track.name
-      end
-      puts "These are the albums:"
-      artist.albums.map do |album|
-        p album.title
-      end
+  def print_artists_and_albums(artist)
+    puts "These are the tracks:"
+    artist.tracks.map do |track|
+      p track.name
     end
+    puts "These are the albums:"
+    artist.albums.map do |album|
+      p album.title
+    end
+  end
+
+  def print_tracks(artist)
+    print_artists_and_albums(artist)
   end
 
   def run
     input = gets_user_input
-    artist = find_by_artist_id(input.to_i)
-    #find find_artist_by_name is returning an empty array for some reason. fix that.
-    print_tracks(artist)
+    if !Artist.exists?(input.to_i)
+      puts "Enter the correct number from the list."
+      run
+    else
+      artist = find_by_artist_id(input.to_i)
+      print_tracks(artist)
+    end
   end
-
-  #find artist with the name of the input
-
-  # Artist.where('lower(name) = ?', input.downcase).first
 
   def list
     Artist.all.each.with_index(1) do |artist, i|
@@ -70,15 +61,3 @@ class CommandLineInterface
     end
   end
 end
-
-# "Select an artist"
-
-# 1. Artist1
-# 2. Artist2
-# 3. Artist3
-# ...
-
-# User picks "1"
-
-# These are the tracks for Artist 1:
-# These are the albums for Artist 1:
